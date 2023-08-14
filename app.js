@@ -1,3 +1,5 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
 
 //React code 
 var temp=React.createElement("div",{id:"test1"},
