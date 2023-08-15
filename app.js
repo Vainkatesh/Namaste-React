@@ -1,24 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
-//React code 
-var temp=React.createElement("div",{id:"test1"},
-         React.createElement("div",{id:"test2"},
-        [React.createElement("h1",{},"Welcome Vainky to React"),
-        React.createElement("h2",{},"Welcome Vainky to React h2")]));
-
-// To Pass multiple elemenest in children use array just like above h1 and h2
+import "./index.css";
 
 
 
-    
-var root=ReactDOM.createRoot(document.getElementById("parent"));
-root.render(temp);
+const heading=React.createElement("h1",{id:"heading"},"Namaste Vainkatesh");
 
-//Pure JS code
-// var t=document.createElement("h1");
-// t.innerHTML="Hello World in JS";
 
-// var test=document.getElementById("root");
-// test.appendChild(t);
+//JSX - html like - xml like
+const JSXHeading=(<h1 id="heading" className="haeding" tabIndex="5">
+        Namaste Vainkatesh with JSX
+        </h1>);
 
+const Title=()=>{
+       return <div className="container"><h1>Title Component</h1></div>;
+};
+const HeadingComponent=()=>{
+        return (<div>
+                {Title()}
+                <Title/>
+                {100+200}
+                {console.log("test Vainky")}
+                <h1>Functional component</h1>
+                </div>);
+};
+
+const root= ReactDOM.createRoot(document.getElementById("root"));
+
+
+//root.render(JSXheading);
+
+root.render(<HeadingComponent/>);
