@@ -20,6 +20,9 @@ const Header=()=>{
                             <li key="contactus">
                                 <Link to="/contact">Contact us</Link> 
                             </li>
+                            <li key="grocery">
+                                <Link to="/grocery">Grocery</Link> 
+                            </li>
                             <li key="cart">Cart</li>
                             <li key="log" onClick={()=>btnName==="Login"?setBtnName("Logout"):setBtnName("Login")}>{btnName}</li>
                     </ul>
