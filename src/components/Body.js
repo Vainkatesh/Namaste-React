@@ -3,6 +3,7 @@ import RestaurentCard from "./RestaurentCard";
 // import { restaurants } from "../utils/mockData";
 import Shimmer from "./Shimmer";
 import "../../index.css";
+import { Link } from "react-router-dom";
 
 const Body = () =>{
 
@@ -20,11 +21,13 @@ const Body = () =>{
         const data=await fetch(url);
         const json=await data.json();
 
-        console.log(json);
+        //console.log(json);
         // const newResData=[...restaurantData,...json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants]
+        const resD=json?.data?.cards.find(card=>card.card.card.id==="restaurant_grid_listing");
+        // console.log(resD);
         
-        setRestaurantData(json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        setFilteredRestaurants(json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setRestaurantData(resD?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredRestaurants(resD?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
 
     const filterTopRatedRestaurents=()=>{
@@ -58,7 +61,7 @@ const Body = () =>{
                     </div>
                     {filteredRestaurants.length===0?<Shimmer/>:
                     (<div className="res-container">
-                            {filteredRestaurants.map(restaurant=><RestaurentCard key={restaurant?.info?.id} resData={restaurant}/>)}
+                            {filteredRestaurants.map(restaurant=><Link key={restaurant?.info?.id} to={"/restaurants/"+restaurant?.info?.id}><RestaurentCard resData={restaurant}/></Link>)}
                             {/* <RestaurentCard resData={restaurants[0]}/>
                             <RestaurentCard resData={restaurants[1]}/> */}
                     </div>)}
