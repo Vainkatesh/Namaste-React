@@ -1,12 +1,16 @@
-import React,{ useState,useEffect } from "react";
-import RestaurentCard from "./RestaurentCard";
+import React,{ useState,useEffect, useContext } from "react";
+import RestaurentCard, { withPromotedLabel } from "./RestaurentCard";
 // import { restaurants } from "../utils/mockData";
 import Shimmer from "./Shimmer";
 import "../../index.css";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () =>{
+
+    const {loggedInUser,setUserInfo}=useContext(UserContext);
+    // console.log(data);
 
     const [restaurantData,setRestaurantData]=useState([]);
     const [filteredRestaurants,setFilteredRestaurants]=useState([]);
@@ -51,6 +55,8 @@ const Body = () =>{
 //     return <Shimmer/>
 // }
 
+const RestaurantCardPromoted=withPromotedLabel(RestaurentCard);
+
 const onlineStatus=useOnlineStatus();
 if(onlineStatus===false){
     return <h1>Looks like you are offline, Please check your Internet connection!</h1>;
@@ -64,10 +70,16 @@ if(onlineStatus===false){
                             <button className="top-rated-res" onClick={filterTopRatedRestaurents}>Top Rated Restaurents</button>
                             <button className="all-res" onClick={()=>setFilteredRestaurants(restaurantData)}>Show All Restaurents</button>
                             <button className="show-more" onClick={showMoreRestaurents}>Show More Restaurents</button>
+                            <label>   User Name: </label>
+                            <input className="search-input" value={loggedInUser} onChange={(e)=>setUserInfo(e.target.value)}/>
                     </div>
                     {filteredRestaurants.length===0?<Shimmer/>:
                     (<div className="res-container">
-                            {filteredRestaurants.map(restaurant=><Link key={restaurant?.info?.id} to={"/restaurants/"+restaurant?.info?.id}><RestaurentCard resData={restaurant}/></Link>)}
+                            {filteredRestaurants.map(restaurant=>
+                            <Link key={restaurant?.info?.id} to={"/restaurants/"+restaurant?.info?.id}>
+                                {restaurant?.info?.promoted?<RestaurantCardPromoted resData={restaurant}/>:<RestaurentCard resData={restaurant}/>}
+                                 {/* <RestaurentCard resData={restaurant}/> */}
+                            </Link>)}
                             {/* <RestaurentCard resData={restaurants[0]}/>
                             <RestaurentCard resData={restaurants[1]}/> */}
                     </div>)}

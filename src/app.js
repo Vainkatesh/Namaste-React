@@ -1,4 +1,4 @@
-import React,{lazy,Suspense} from "react";
+import React,{lazy,Suspense, useEffect, useState} from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -11,22 +11,44 @@ import "../index.css";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { lazy } from "react";
 import Shimmer from "./components/Shimmer";
+import UserContext from "./utils/UserContext";
 // import Grocery from "./components/Grocery";
 
 
 const Grocery=lazy(()=>import("./components/Grocery"));
 const About=lazy(()=>import("./components/About"));
 
-const AppLayout=()=>(
-        <div className="app">
-                <Header/>
-                {/*if route is / load Body */ }
-                {/*if route is /contact load Contact */ }
-                {/*if route is /about load About */ }
-                <Outlet/>
-                <Footer/>
-        </div>
+const AppLayout=()=>{
+
+        const [userInfo,setUserInfo]=useState("");
+
+        useEffect(()=>{
+                //make an api call by passing username and password and set user info
+                const data={
+                        name:"Vainkatesh Kashyap"
+                }
+                setUserInfo(data.name);
+
+        },[])
+
+        //suppose Authentication code
+
+
+
+
+        return (
+                <UserContext.Provider value={{loggedInUser:userInfo,setUserInfo:setUserInfo}}>
+                <div className="app">
+                        <Header/>
+                        {/*if route is / load Body */ }
+                        {/*if route is /contact load Contact */ }
+                        {/*if route is /about load About */ }
+                        <Outlet/>
+                        <Footer/>
+                </div>
+                </UserContext.Provider>
 );
+}
 
 
 const router=createBrowserRouter([
@@ -37,6 +59,7 @@ const router=createBrowserRouter([
                         {
                                 path:"/",
                                 element:<Body/>
+                                // element: <UserContext.Provider value={{loggedInUser:"Vainky"}}><Body/></UserContext.Provider>
                         },
                         {
                                 path:"/about",
@@ -44,7 +67,7 @@ const router=createBrowserRouter([
                         },
                         {
                                 path:"/contact",
-                                element:<Contact/>
+                                element:<UserContext.Provider value={{loggedInUser:"Vainky"}}><Contact/></UserContext.Provider>
                         },
                         {
                                 path:"/restaurants/:resId",
