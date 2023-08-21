@@ -165,3 +165,8 @@
     text-align: center;
     cursor: pointer;
 }
+
+.user-card{
+    padding: 10px;
+    border: 1px solid black;
+}
