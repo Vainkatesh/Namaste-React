@@ -32,6 +32,12 @@ const Header=()=>{
                             <li key="contactus">
                                 <Link to="/contact">Contact us</Link> 
                             </li>
+                            <li key="demo">
+                                <Link to="/demo">Demo</Link> 
+                            </li>
+                            <li key="demo">
+                                <Link to="/demo2">Demo2</Link> 
+                            </li>
                             <li key="grocery">
                                 <Link to="/grocery">Grocery</Link> 
                             </li>
