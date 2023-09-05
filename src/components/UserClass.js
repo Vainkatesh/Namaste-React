@@ -24,10 +24,10 @@ class UserClass extends React.Component{
         const data=await fetch("https://api.github.com/users/Vainkatesh");
         const userData=await data.json();
         this.setState({userInfo:userData});
-        console.log(userData);
+        // console.log(userData);
 
         this.timer=setInterval(()=>{
-            console.log("Namaste React OP")
+            // console.log("Namaste React OP")
         },1000);
     }
 
@@ -36,13 +36,13 @@ class UserClass extends React.Component{
             //Do something
             // This was the convention in class components
         }
-        console.log("Component did update");
+        // console.log("Component did update");
     }
 
     componentWillUnmount(){
         clearInterval(this.timer);
         //Cleaning up setInterval before we unmount the page, move to a new page otherwise it setInterval will keep running
-        console.log("component will unmount");
+        // console.log("component will unmount");
     }
 
 

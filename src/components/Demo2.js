@@ -6,12 +6,12 @@ const Demo2=()=>{
     const [y,setY]=useState(0);
     const ref=useRef(0);
 
-    console.log("rendering again...");
+    // console.log("rendering again...");
 
     const timer=useRef(null);
     useEffect(()=>{
         timer.current=setInterval(()=>{
-            console.log("Inside interval "+Math.random());
+            // console.log("Inside interval "+Math.random());
         },1000)
 
         return ()=>clearInterval(timer.current);
@@ -24,7 +24,7 @@ const Demo2=()=>{
             <div>
                 <button onClick={()=>{
                     x=x+1;
-                    console.log("x= "+x);
+                    // console.log("x= "+x);
                 }}>Increase x</button>
                 <span>Let Variable X: {x}</span>
             </div>
@@ -37,7 +37,7 @@ const Demo2=()=>{
             <div>
                 <button onClick={()=>{
                     ref.current=ref.current+1;
-                    console.log("ref= "+ref.current);
+                    // console.log("ref= "+ref.current);
                 }}>Increase y</button>
                 <span>Ref Variable ref: {ref.current}</span>
             </div>

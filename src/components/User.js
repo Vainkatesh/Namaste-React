@@ -6,14 +6,14 @@ const User =({name})=>{
 
     useEffect(()=>{
         const interval=setInterval(()=>{
-            console.log("Namaste React OP")
+            // console.log("Namaste React OP")
         },1000);
 
-        console.log("useEffect");
+        // console.log("useEffect");
 
         return ()=>{
             clearInterval(interval);
-            console.log("useEffect return");
+            // console.log("useEffect return");
         }
         //This will be called while unmounting
         //Return will work as component will Unmount for cleanup
